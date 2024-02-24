@@ -1,0 +1,58 @@
+import java.time.LocalDateTime;
+
+
+
+interface Interviewer {
+    abstract void conductInterview();
+    default void submitInterviewStatus() {
+        System.out.println("Accept");
+    }
+    static void bookConferenceRoom(LocalDateTime dateTime, int duration) {
+        System.out.println("Interview scheduled on:" + dateTime);
+        System.out.println("Book conference room for: "+duration + " hrs");
+    }
+}
+
+// The method bookConferenceRoom() must be called by prefixing its call with the interface name.
+// You can’t call it using a reference variable of the type Interviewer or of the class that implements this interface.
+class Manager implements Interviewer {}
+class Project {
+    public static void main(String[] args) {
+        Interviewer inv = new Manager();
+
+        // won't compile
+        inv.bookConferenceRoom(LocalDateTime.now(), 2);
+        Manager mgr = new Manager();
+        // won't compile
+        mgr.bookConferenceRoom(LocalDateTime.now(), 2);
+
+        // will compile
+        Interviewer.bookConferenceRoom(LocalDateTime.now(), 2);
+    }
+}
+
+class Employee {
+    // Static method in class Employee
+    static void defaultPlan() {
+        System.out.println("Basic");
+    }
+}
+
+// You can call a static method defined in a class either by using reference variables or by the name of the class
+class Programmer extends Employee {}
+
+public class Feb8 {
+    public static void main(String[] args) {
+        Employee emp = new Programmer();
+        // static method accessed using variable emp
+        emp.defaultPlan();
+
+        Programmer pgr = new Programmer();
+        // static method accessed using variable pg
+        pgr.defaultPlan();
+
+        //  static method accessed using Employee and Programmer
+        Employee.defaultPlan();
+        Programmer.defaultPlan();
+    }
+}

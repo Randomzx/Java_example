@@ -1,0 +1,80 @@
+public class Feb6 {
+    /*
+    public static void main(String[] args) {
+        String[] programmers = {"John", "Bob", "Kevin", "Harry"};
+        // labels
+        outer:
+        for (String name1 : programmers) {
+            for (String name : programmers) {
+                if (name.equals("Kevin")) {
+                    // Skips remaining code for current iteration of outer loop and starts with its next iteration
+                    //continue outer;
+
+                    // Exits the outer loop, marked with label outer
+                    break ;
+
+                }
+                System.out.println(name);
+            }
+        }
+
+    }
+*/
+}
+// When a class inherits another class, it encloses within it an object of the inherited class.
+// Therefore, all nonprivate members of the inherited class are available to the class,
+class Employee {
+    protected String name;
+    protected String address;
+    protected float experience;
+}
+class Manager extends Employee {
+    protected int teamSize;
+    public void reportProjectStatus() {}
+}
+class Programmer extends Employee {
+    private String[] programmingLanguages;
+    public void writeCode() {}
+    public void accessBaseClassMembers() {
+        // Derived class Programmer can directly access members of its superclass
+        name = "Programmer";
+    }
+
+    public static void main(String[] args) {
+        Programmer test = new Programmer();
+        test.accessBaseClassMembers();
+        System.out.println(test.name);
+    }
+
+}
+
+// [Which base class members are inherited by a derived class?]
+//The access modifiers play an important role in determining the inheritance of base class members in derived classes.
+// A derived class can inherit only what it can see.
+// A derived class inherits all the nonprivate members of its base class.
+// A derived class inherits base class members with the following accessibility levels:
+    // [Default—Members] with default access can be accessed in a derived class
+            // only if the base and derived classes reside in the same package.
+    // [protected—Members] with protected access are accessible to all the derived classes,
+            // regardless of the packages in which the base and derived classes are defined.
+    // [public—Members] with public access are visible to all other classes
+
+// Which base class members aren’t inherited by a derived class?
+//A derived class doesn’t inherit the following members:
+    // [private members] of the base class.
+    // Base class members with default access if the base class and derived classes exist in [separate packages].
+    // [Constructors of the base class]. A derived class can call a base class’s constructors, but it doesn’t inherit them
+
+
+// It isn’t mandatory for an abstract class to define an abstract method.
+// But if an abstract base class defines one or more abstract methods,
+    // the class must be marked as abstract and the abstract methods must be implemented in all its concrete derived classes.
+    // If a derived class doesn’t implement all the abstract methods defined by its base class, then it also needs to be an abstract class.
+
+
+// Implementing inheritance using an abstract base class:
+    // You can never create objects of an abstract class.
+    // A base class can be defined as an abstract class, even if it doesn’t define any abstract methods.
+    // A derived class should implement all the abstract methods of its base class.
+        // If it doesn’t, it must be defined as an abstract derived class.
+    // You can use variables of an abstract base class to refer to objects of its derived class
